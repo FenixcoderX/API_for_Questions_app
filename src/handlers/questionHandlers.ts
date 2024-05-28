@@ -59,10 +59,11 @@ const create = async (req: Request, res: Response, next: NextFunction) => {
   const generateUID = () => {
     return Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
   };
+  const generatedUID = generateUID();
 
   // Create a new question
   const newQuestion = new Question({
-    id: generateUID(),
+    id: generatedUID,
     timestamp: Date.now(),
     author: author,
     optionOne: {
@@ -75,11 +76,23 @@ const create = async (req: Request, res: Response, next: NextFunction) => {
     },
   });
 
+  const session = await mongoose.startSession();
+  session.startTransaction();
+
   try {
-    const savedQuestion = await newQuestion.save();
+    const updatedUser = await User.findOneAndUpdate({ id: author }, { $push: { [`questions`]: generatedUID } }, { new: true, session });
+    const savedQuestion = await newQuestion.save({ session });
+    
+    if (!savedQuestion || !updatedUser) {
+      throw new Error('Create question failed');
+    }
+    await session.commitTransaction();
     res.json(savedQuestion);
   } catch (err) {
+    await session.abortTransaction();
     next(err);
+  } finally {
+    session.endSession();
   }
 };
 
@@ -110,7 +123,7 @@ const saveAnswer = async (req: Request, res: Response, next: NextFunction) => {
     const updatedUser = await User.findOneAndUpdate({ id: authedUser }, { $set: { [`answers.${qid}`]: answer } }, { new: true, session });
 
     if (!updatedQuestion || !updatedUser) {
-      throw new Error('Update failed');
+      throw new Error('Update question failed');
     }
 
     await session.commitTransaction();
@@ -141,7 +154,6 @@ const questionRoutes = (app: express.Application) => {
 
   // Route to save an answer to the question
   app.put('/questions/saveanswer', verifyAuthToken, saveAnswer);
-
 };
 
 export default questionRoutes;
