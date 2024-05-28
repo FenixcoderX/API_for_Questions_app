@@ -18,7 +18,7 @@ const { BCRYPT_PASSWORD: pepper, SALT_ROUNDS: saltRounds } = process.env;
  * @param {NextFunction} next - The next function used to pass the error to the error handling middlewares
  */
 const signup = async (req: Request, res: Response, next: NextFunction) => {
-  const { id, password, name } = req.body;
+  const { id, password, name, avatarURL } = req.body;
 
   if (!id || !password || !name || id === '' || password === '' || name === '') {
     next(errorHandler(400, 'All fields are required'));
@@ -30,6 +30,7 @@ const signup = async (req: Request, res: Response, next: NextFunction) => {
     id,
     password: hash,
     name,
+    avatarURL,
     answers: {},
   });
   try {
