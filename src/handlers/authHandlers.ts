@@ -33,8 +33,10 @@ const signup = async (req: Request, res: Response, next: NextFunction) => {
     answers: {},
   });
   try {
-    await newUser.save();
-    res.json('Signup successful');
+    const newuserfromDB = await newUser.save();
+    //@ts-ignore
+    const { password: pass, ...newuserfromDBWithoutPassword } = newuserfromDB._doc; 
+    res.json(newuserfromDBWithoutPassword);
   } catch (err) {
     next(err);
   }
