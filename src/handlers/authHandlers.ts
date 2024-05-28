@@ -35,7 +35,7 @@ const signup = async (req: Request, res: Response, next: NextFunction) => {
   try {
     const newuserfromDB = await newUser.save();
     //@ts-ignore
-    const { password: pass, ...newuserfromDBWithoutPassword } = newuserfromDB._doc; 
+    const { password: pass, ...newuserfromDBWithoutPassword } = newuserfromDB._doc;
     res.json(newuserfromDBWithoutPassword);
   } catch (err) {
     next(err);
@@ -89,6 +89,54 @@ const logout = async (req: Request, res: Response, next: NextFunction) => {
     next(error);
   }
 };
+
+const google = async (req: Request, res: Response, next: NextFunction) => {
+  const { id, avatarURL, name } = req.body;
+
+  if (!id || !avatarURL || !name || id === '' || avatarURL === '' || name === '') {
+    next(errorHandler(400, 'All fields are required'));
+  }
+  try {
+    const validUser = await User.findOne({ id });
+    if (validUser) {
+      const token = jwt.sign({ id: validUser.id }, process.env.TOKEN_SECRET as string);
+      //@ts-ignore
+      const { password: pass, ...validUserWithoutPassword } = validUser._doc; //_doc used beacause this is a mongoose object and needed data to use rest opearator is in _doc
+
+      res
+        .status(200)
+        .cookie('access_token', token, {
+          httpOnly: true,
+        })
+        .json(validUserWithoutPassword);
+    } else {
+      const generatedPassword = Math.random().toString(36).slice(-8) + Math.random().toString(36).slice(-8);
+      const hash = bcrypt.hashSync(generatedPassword + pepper, Number(saltRounds));
+      const newUser = new User({
+        id,
+        password: hash,
+        name,
+        avatarURL,
+        answers: {},
+      });
+
+      const newUserFromDB = await newUser.save();
+      const token = jwt.sign({ id: newUserFromDB.id }, process.env.TOKEN_SECRET as string);
+      //@ts-ignore
+      const { password: pass, ...newUserFromDBWithoutPassword } = newUserFromDB._doc; //_doc used beacause this is a mongoose object and needed data to use rest opearator is in _doc
+
+      res
+        .status(200)
+        .cookie('access_token', token, {
+          httpOnly: true,
+        })
+        .json(newUserFromDBWithoutPassword);
+    }
+  } catch (err) {
+    next(err);
+  }
+};
+
 // Express routes here
 
 /**
@@ -103,12 +151,8 @@ const authRoutes = (app: express.Application) => {
   app.post('/auth/login', login);
   // Route to log out
   app.post('/auth/logout', logout);
-  // // Route to authenticate a user
-  // app.post('/auth/authenticate', authenticate),
-  // // Route to update a user using middleware to verify the token
-  // app.put('/auth/:id', verifyAuthToken, update),
-  // // Route to delete a user using middleware to verify the token
-  // app.delete('/auth/:id', verifyAuthToken, del);
+  // Route to authenticate a google user
+  app.post('/auth/google', google);
 };
 
 export default authRoutes;

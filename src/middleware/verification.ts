@@ -28,7 +28,6 @@ export const verifyAuthToken = (req: Request, _res: Response, next: NextFunction
       return next(errorHandler(401, 'Unauthorized'));
     }
     req.body.decoded = decoded;
-    console.log('decoded', decoded);
     next();
   });
 };
