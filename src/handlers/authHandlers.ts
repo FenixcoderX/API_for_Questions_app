@@ -18,27 +18,32 @@ const { BCRYPT_PASSWORD: pepper, SALT_ROUNDS: saltRounds } = process.env;
  * @param {NextFunction} next - The next function used to pass the error to the error handling middlewares
  */
 const signup = async (req: Request, res: Response, next: NextFunction) => {
-  const { id, password, name, avatarURL } = req.body;
+  const { email, password, name, avatarURL } = req.body;
 
-  if (!id || !password || !name || id === '' || password === '' || name === '') {
+  if (!email || !password || !name || email === '' || password === '' || name === '') {
     next(errorHandler(400, 'All fields are required'));
   }
+  const generateUID = () => {
+    return Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
+  };
 
   // Destructure the BCRYPT_PASSWORD and SALT_ROUNDS from the process.env object and assign them to the pepper and saltRounds variables
   const hash = bcrypt.hashSync(password + pepper, Number(saltRounds));
   const newUser = new User({
-    id,
+    id: generateUID(),
+    email,
     password: hash,
     name,
     avatarURL,
     answers: {},
   });
   try {
-    const newuserfromDB = await newUser.save();
+    const newUserFromDB = await newUser.save();
     //@ts-ignore
-    const { password: pass, ...newuserfromDBWithoutPassword } = newuserfromDB._doc;
-    res.json(newuserfromDBWithoutPassword);
+    const { password: pass, email: email_, ...newUserFromDBWithoutPasswordEmail } = newUserFromDB._doc;
+    res.json(newUserFromDBWithoutPasswordEmail);
   } catch (err) {
+    console.log(err);
     next(err);
   }
 };
@@ -51,14 +56,14 @@ const signup = async (req: Request, res: Response, next: NextFunction) => {
  * @param {NextFunction} next - The next function used to pass the error to the error handling middlewares
  */
 const login = async (req: Request, res: Response, next: NextFunction) => {
-  const { id, password } = req.body;
+  const { email, password } = req.body;
 
-  if (!id || !password || id === '' || password === '') {
+  if (!email || !password || email === '' || password === '') {
     next(errorHandler(400, 'All fields are required'));
   }
 
   try {
-    const validUser = await User.findOne({ id });
+    const validUser = await User.findOne({ email });
     if (!validUser) {
       return next(errorHandler(404, 'User not found'));
     }
@@ -70,7 +75,7 @@ const login = async (req: Request, res: Response, next: NextFunction) => {
     }
     const token = jwt.sign({ id: validUser.id }, process.env.TOKEN_SECRET as string);
     //@ts-ignore
-    const { password: pass, ...validUserWithoutPassword } = validUser._doc; //_doc used beacause this is a mongoose object and needed data to use rest opearator is in _doc
+    const { password: pass, email: email_, ...validUserWithoutPassword } = validUser._doc; //_doc used beacause this is a mongoose object and needed data to use rest opearator is in _doc
 
     res
       .status(200)
@@ -92,17 +97,17 @@ const logout = async (req: Request, res: Response, next: NextFunction) => {
 };
 
 const google = async (req: Request, res: Response, next: NextFunction) => {
-  const { id, avatarURL, name } = req.body;
-
-  if (!id || !avatarURL || !name || id === '' || avatarURL === '' || name === '') {
+  const { email, avatarURL } = req.body;
+  let { name } = req.body;
+  if (!email || !avatarURL || !name || email === '' || avatarURL === '' || name === '') {
     next(errorHandler(400, 'All fields are required'));
   }
   try {
-    const validUser = await User.findOne({ id });
+    const validUser = await User.findOne({ email });
     if (validUser) {
       const token = jwt.sign({ id: validUser.id }, process.env.TOKEN_SECRET as string);
       //@ts-ignore
-      const { password: pass, ...validUserWithoutPassword } = validUser._doc; //_doc used beacause this is a mongoose object and needed data to use rest opearator is in _doc
+      const { password: pass, email: email_, ...validUserWithoutPassword } = validUser._doc; //_doc used beacause this is a mongoose object and needed data to use rest opearator is in _doc
 
       res
         .status(200)
@@ -111,10 +116,19 @@ const google = async (req: Request, res: Response, next: NextFunction) => {
         })
         .json(validUserWithoutPassword);
     } else {
+      
+      const userWithSpecificName = await User.findOne({ name });
+      if (userWithSpecificName) {
+        name = `${name}${Math.floor(Math.random() * 100000)}`;
+      }
+      const generateUID = () => {
+        return Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
+      };
       const generatedPassword = Math.random().toString(36).slice(-8) + Math.random().toString(36).slice(-8);
       const hash = bcrypt.hashSync(generatedPassword + pepper, Number(saltRounds));
       const newUser = new User({
-        id,
+        id: generateUID(),
+        email,
         password: hash,
         name,
         avatarURL,
@@ -124,7 +138,7 @@ const google = async (req: Request, res: Response, next: NextFunction) => {
       const newUserFromDB = await newUser.save();
       const token = jwt.sign({ id: newUserFromDB.id }, process.env.TOKEN_SECRET as string);
       //@ts-ignore
-      const { password: pass, ...newUserFromDBWithoutPassword } = newUserFromDB._doc; //_doc used beacause this is a mongoose object and needed data to use rest opearator is in _doc
+      const { password: pass, email: email_, ...newUserFromDBWithoutPassword } = newUserFromDB._doc; //_doc used beacause this is a mongoose object and needed data to use rest opearator is in _doc
 
       res
         .status(200)

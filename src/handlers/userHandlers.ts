@@ -18,7 +18,7 @@ const getAll = async (_req: Request, res: Response, next: NextFunction) => {
     // Remove password key from each user
     const usersWithoutPassword = users.map((user) => {
       //@ts-ignore
-      const { password: pass, ...userWithoutPassword } = user._doc;
+      const { password: pass,email:email_, ...userWithoutPassword } = user._doc;
       return userWithoutPassword;
     });
 

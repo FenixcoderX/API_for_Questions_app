@@ -1,6 +1,7 @@
 export let users = [
   {
-    id: 'benanderson',
+    id: 'fgdsgjsdfgknsfdkgndfbndsfbasdnf',
+    email: 'benanderson@gmail.com',  
     password: '$2b$10$rhqBNXYXul8gJEtZ8XJ1SuhkJCW9gyMfp51K6Lliwz/0TyFKHg30q',
     name: 'Benjamin Anderson',
     avatarURL: 'https://i.postimg.cc/FH1nJ6gx/avatar4.jpg',
@@ -13,7 +14,8 @@ export let users = [
     questions: ['8xf0y6ziyjabvozdd253nd', 'am8ehyc8byjqgar0jgpub9'],
   },
   {
-    id: 'annako',
+    id: '324ytsdiufygrejkfvmhsdvfm',
+    email: 'annako@gmail.com',  
     password: '$2b$10$rhqBNXYXul8gJEtZ8XJ1SuhkJCW9gyMfp51K6Lliwz/0TyFKHg30q',
     name: 'Anna Kowalczyk',
     avatarURL: 'https://i.postimg.cc/7PnKf47z/avatar1.jpg',
@@ -24,7 +26,8 @@ export let users = [
     questions: ['loxhs1bqm25b708cmbf3g', 'vthrdm985a262al8qx3do'],
   },
   {
-    id: 'lucarossi',
+    id: 'fuh3o82gkuvsdfkjvebjn394o348',
+    email: 'lucarossi@gmail.com', 
     password: '$2b$10$rhqBNXYXul8gJEtZ8XJ1SuhkJCW9gyMfp51K6Lliwz/0TyFKHg30q',
     name: 'Luca Rossi',
     avatarURL: 'https://i.postimg.cc/vTHC2Z9J/avatar2.jpg',
@@ -36,7 +39,8 @@ export let users = [
     questions: ['6ni6ok3ym7mf1p33lnez', 'xj352vofupe1dqz9emx13r'],
   },
   {
-    id: 'dubois',
+    id: '3894y7ow8ehfkhjsbdnsadjfbasdnbg',
+    email: 'dubois@gmail.com', 
     password: '$2b$10$rhqBNXYXul8gJEtZ8XJ1SuhkJCW9gyMfp51K6Lliwz/0TyFKHg30q',
     name: 'Pierre Dubois',
     avatarURL: 'https://i.postimg.cc/J0qdbV2p/avatar3.jpg',
@@ -50,10 +54,10 @@ export let users = [
 export let questions = [
   {
     id: '8xf0y6ziyjabvozdd253nd',
-    author: 'benanderson',
+    author: 'fgdsgjsdfgknsfdkgndfbndsfbasdnf',
     timestamp: 1700754192235,
     optionOne: {
-      votes: ['benanderson'],
+      votes: ['fgdsgjsdfgknsfdkgndfbndsfbasdnf'],
       text: 'buy a house in the suburbs',
     },
     optionTwo: {
@@ -63,66 +67,66 @@ export let questions = [
   },
   {
     id: '6ni6ok3ym7mf1p33lnez',
-    author: 'lucarossi',
+    author: 'fuh3o82gkuvsdfkjvebjn394o348',
     timestamp: 1700740000631,
     optionOne: {
       votes: [],
       text: 'take a gap year to travel',
     },
     optionTwo: {
-      votes: ['lucarossi', 'benanderson'],
+      votes: ['fuh3o82gkuvsdfkjvebjn394o348', 'fgdsgjsdfgknsfdkgndfbndsfbasdnf'],
       text: 'start a new job immediately',
     },
   },
   {
     id: 'am8ehyc8byjqgar0jgpub9',
-    author: 'benanderson',
+    author: 'fgdsgjsdfgknsfdkgndfbndsfbasdnf',
     timestamp: 1700655802264,
     optionOne: {
       votes: [],
       text: 'adopt a dog from a shelter',
     },
     optionTwo: {
-      votes: ['benanderson'],
+      votes: ['fgdsgjsdfgknsfdkgndfbndsfbasdnf'],
       text: 'purchase a purebred puppy from a breeder',
     },
   },
   {
     id: 'loxhs1bqm25b708cmbf3g',
-    author: 'annako',
+    author: '324ytsdiufygrejkfvmhsdvfm',
     timestamp: 1700575962234,
     optionOne: {
       votes: [],
       text: 'try skydiving for the first time',
     },
     optionTwo: {
-      votes: ['benanderson'],
+      votes: ['fgdsgjsdfgknsfdkgndfbndsfbasdnf'],
       text: 'scuba diving in a coral reef',
     },
   },
   {
     id: 'vthrdm985a262al8qx3do',
-    author: 'annako',
+    author: '324ytsdiufygrejkfvmhsdvfm',
     timestamp: 1700776863253,
     optionOne: {
-      votes: ['annako'],
+      votes: ['324ytsdiufygrejkfvmhsdvfm'],
       text: 'start a new hobby',
     },
     optionTwo: {
-      votes: ['lucarossi'],
+      votes: ['fuh3o82gkuvsdfkjvebjn394o348'],
       text: 'continue with current interests',
     },
   },
   {
     id: 'xj352vofupe1dqz9emx13r',
-    author: 'lucarossi',
+    author: 'fuh3o82gkuvsdfkjvebjn394o348',
     timestamp: 1700747601631,
     optionOne: {
-      votes: ['lucarossi', 'dubois'],
+      votes: ['fuh3o82gkuvsdfkjvebjn394o348', '3894y7ow8ehfkhjsbdnsadjfbasdnbg'],
       text: 'explore a dense rainforest alone',
     },
     optionTwo: {
-      votes: ['annako'],
+      votes: ['324ytsdiufygrejkfvmhsdvfm'],
       text: 'join a guided wildlife tour in the Amazon',
     },
   },
