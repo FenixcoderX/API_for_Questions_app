@@ -7,7 +7,7 @@
     "start": "tsc && node ./dist/server.js",
     "setInitialData": "tsc && node ./dist/data/data.service.js",
     "watch": "tsc-watch --esModuleInterop src/server.ts --outDir ./dist --onSuccess \"node ./dist/server.js\"",
-    "tsc": "tsc"
+    "build": "tsc"
   },
   "author": "FenixcoderX",
   "license": "MIT",

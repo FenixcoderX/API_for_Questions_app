@@ -12,8 +12,5 @@
       "src": "/(.*)",
       "dest": "dist/server.js"
     }
-  ],
-  "scripts": {
-    "build": "your-build-command"
-  }
+  ]
 }
