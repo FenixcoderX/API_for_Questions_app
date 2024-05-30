@@ -2,7 +2,7 @@ export let users = [
   {
     id: 'fgdsgjsdfgknsfdkgndfbndsfbasdnf',
     email: 'benanderson@gmail.com',  
-    password: '$2b$10$rhqBNXYXul8gJEtZ8XJ1SuhkJCW9gyMfp51K6Lliwz/0TyFKHg30q',
+    password: '$2b$10$jbC41xyV2d2AOjPZW9QbzO8A12n4Kl/tmQJFN7ObNzuL3S7i90/zy',
     name: 'Benjamin Anderson',
     avatarURL: 'https://i.postimg.cc/FH1nJ6gx/avatar4.jpg',
     answers: {
@@ -16,7 +16,7 @@ export let users = [
   {
     id: '324ytsdiufygrejkfvmhsdvfm',
     email: 'annako@gmail.com',  
-    password: '$2b$10$rhqBNXYXul8gJEtZ8XJ1SuhkJCW9gyMfp51K6Lliwz/0TyFKHg30q',
+    password: '$2b$10$jbC41xyV2d2AOjPZW9QbzO8A12n4Kl/tmQJFN7ObNzuL3S7i90/zy',
     name: 'Anna Kowalczyk',
     avatarURL: 'https://i.postimg.cc/7PnKf47z/avatar1.jpg',
     answers: {
@@ -28,7 +28,7 @@ export let users = [
   {
     id: 'fuh3o82gkuvsdfkjvebjn394o348',
     email: 'lucarossi@gmail.com', 
-    password: '$2b$10$rhqBNXYXul8gJEtZ8XJ1SuhkJCW9gyMfp51K6Lliwz/0TyFKHg30q',
+    password: '$2b$10$jbC41xyV2d2AOjPZW9QbzO8A12n4Kl/tmQJFN7ObNzuL3S7i90/zy',
     name: 'Luca Rossi',
     avatarURL: 'https://i.postimg.cc/vTHC2Z9J/avatar2.jpg',
     answers: {
@@ -41,7 +41,7 @@ export let users = [
   {
     id: '3894y7ow8ehfkhjsbdnsadjfbasdnbg',
     email: 'dubois@gmail.com', 
-    password: '$2b$10$rhqBNXYXul8gJEtZ8XJ1SuhkJCW9gyMfp51K6Lliwz/0TyFKHg30q',
+    password: '$2b$10$jbC41xyV2d2AOjPZW9QbzO8A12n4Kl/tmQJFN7ObNzuL3S7i90/zy',
     name: 'Pierre Dubois',
     avatarURL: 'https://i.postimg.cc/J0qdbV2p/avatar3.jpg',
     answers: {
