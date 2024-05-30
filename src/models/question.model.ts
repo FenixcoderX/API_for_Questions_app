@@ -22,6 +22,9 @@ const questionSchema = new mongoose.Schema(
     timestamp: {
       type: Number,
     },
+    questionText: {
+      type: String,
+    },
     optionOne: optionSchema,
     optionTwo: optionSchema,
   },

@@ -43,13 +43,16 @@ const getAll = async (_req: Request, res: Response, next: NextFunction) => {
  * @param {NextFunction} next - The next function used to pass the error to the error handling middlewares
  */
 const create = async (req: Request, res: Response, next: NextFunction) => {
-  const { optionOneText, optionTwoText, author } = req.body;
+  const {questionText, optionOneText, optionTwoText, author } = req.body;
 
   if (!optionOneText || !optionTwoText || !author || optionOneText === '' || optionTwoText === '' || author === '') {
     next(errorHandler(400, 'All fields are required'));
   }
   if (optionOneText.length > 100 || optionTwoText.length > 100) {
-    next(errorHandler(400, 'Question length should not exceed 100 characters'));
+    next(errorHandler(400, 'Answer option length should not exceed 100 characters'));
+  }
+  if (questionText.length > 400) {
+    next(errorHandler(400, 'Question length should not exceed 400 characters'));
   }
 
   if (author !== req.body.decoded.id) {
@@ -66,6 +69,7 @@ const create = async (req: Request, res: Response, next: NextFunction) => {
     id: generatedUID,
     timestamp: Date.now(),
     author: author,
+    questionText,
     optionOne: {
       votes: [],
       text: optionOneText,
