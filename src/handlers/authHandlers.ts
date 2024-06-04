@@ -81,6 +81,8 @@ const login = async (req: Request, res: Response, next: NextFunction) => {
       .status(200)
       .cookie('access_token', token, {
         httpOnly: true,
+        sameSite: 'none',
+        secure: true,
       })
       .json(validUserWithoutPassword);
   } catch (error) {
@@ -90,7 +92,10 @@ const login = async (req: Request, res: Response, next: NextFunction) => {
 
 const logout = async (req: Request, res: Response, next: NextFunction) => {
   try {
-    res.clearCookie('access_token').status(200).json('User has been logged out');
+    res.clearCookie('access_token',{
+      sameSite: 'none',
+      secure: true,
+    }).status(200).json('User has been logged out');
   } catch (error) {
     next(error);
   }
@@ -144,6 +149,8 @@ const google = async (req: Request, res: Response, next: NextFunction) => {
         .status(200)
         .cookie('access_token', token, {
           httpOnly: true,
+          sameSite: 'none',
+          secure: true,
         })
         .json(newUserFromDBWithoutPassword);
     }
