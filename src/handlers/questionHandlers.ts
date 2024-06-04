@@ -43,7 +43,7 @@ const getAll = async (_req: Request, res: Response, next: NextFunction) => {
  * @param {NextFunction} next - The next function used to pass the error to the error handling middlewares
  */
 const create = async (req: Request, res: Response, next: NextFunction) => {
-  const {questionText, optionOneText, optionTwoText, author } = req.body;
+  const { questionText, optionOneText, optionTwoText, author } = req.body;
 
   if (!optionOneText || !optionTwoText || !author || optionOneText === '' || optionTwoText === '' || author === '') {
     next(errorHandler(400, 'All fields are required'));
@@ -86,7 +86,7 @@ const create = async (req: Request, res: Response, next: NextFunction) => {
   try {
     const updatedUser = await User.findOneAndUpdate({ id: author }, { $push: { [`questions`]: generatedUID } }, { new: true, session });
     const savedQuestion = await newQuestion.save({ session });
-    
+
     if (!savedQuestion || !updatedUser) {
       throw new Error('Create question failed');
     }
@@ -142,6 +142,36 @@ const saveAnswer = async (req: Request, res: Response, next: NextFunction) => {
   }
 };
 
+/**
+ * Handles SSE updates for the 'Questions' collection in the database
+ *
+ * @param req - The request object used to listen for the connection close event
+ * @param res - The response object used to send the updated data
+ */
+const updates = async (req: Request, res: Response) => {
+  
+  res.setHeader('Content-Type', 'text/event-stream');
+  res.setHeader('Cache-Control', 'no-cache');
+  res.setHeader('Connection', 'keep-alive');
+  res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000');
+  res.setHeader('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
+  res.setHeader('Access-Control-Allow-Credentials', 'true');
+
+  // Subscribe to changes in 'Questions' collection
+  const changeStream = Question.watch([], { fullDocument: 'updateLookup' });
+  changeStream.on('change', (change) => {
+    // Send updated data to the client every time there is a change in the collection
+    res.write(`data: ${JSON.stringify(change.fullDocument)}\n\n`);
+  });
+
+  // When the connection closes, stop listening for changes
+  req.on('close', () => {
+    changeStream.close();
+    res.end();
+    
+  });
+};
+
 // Express routes here
 
 /**
@@ -158,6 +188,9 @@ const questionRoutes = (app: express.Application) => {
 
   // Route to save an answer to the question
   app.put('/questions/saveanswer', verifyAuthToken, saveAnswer);
+
+  // Route to send updates for the questions collection
+  app.get('/questions/updates', verifyAuthToken, updates);
 };
 
 export default questionRoutes;

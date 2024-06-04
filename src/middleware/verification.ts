@@ -16,7 +16,7 @@ interface DecodedData {
  */
 export const verifyAuthToken = (req: Request, _res: Response, next: NextFunction) => {
   let token = req.cookies.access_token; // Save the token from the cookie
-
+  
   if (!token) {
     console.log('no token');
     return next(errorHandler(401, 'Unauthorized'));
