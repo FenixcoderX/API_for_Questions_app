@@ -28,7 +28,7 @@ mongoose
 
 // CORS configuration
 const corsOptions = {
-  origin: 'http://localhost:3000', // Name of the domain - "for all requests" (can be changed in the future)
+  origin: process.env.CORS_ORIGIN, // Name of the domain - "for all requests" (can be changed in the future)
   optionsSuccessStatus: 200,
   credentials: true, // This allows session cookies to be sent with the request
 };
