@@ -36,7 +36,7 @@ export let users = [
       'vthrdm985a262al8qx3do': 'optionTwo',
       '6ni6ok3ym7mf1p33lnez': 'optionOne',
     },
-    questions: ['6ni6ok3ym7mf1p33lnez', 'xj352vofupe1dqz9emx13r'],
+    questions: ['6ni6ok3ym7mf1p33lnez', 'xj352vofupe1dqz9emx13r','lsn52v467he1dqzgnexhko'],
   },
   {
     id: '3894y7ow8ehfkhjsbdnsadjfbasdnbg',
@@ -49,91 +49,115 @@ export let users = [
     },
     questions: [],
   },
+  {
+    id: 'nc8nrzj9uqjr1zz4gnnn0p',
+    email: 'test@gmail.com', 
+    password: '$2b$10$IsQIs81eKWOZsIJ3LC6EGuAz0BrKezyzW/pm3CrGYxHhcx4tQL9Ga',
+    name: 'Test User',
+    avatarURL: 'https://firebasestorage.googleapis.com/v0/b/questions-fenixcoderx.appspot.com/o/1717468313086-Unknown.jpg?alt=media&token=31352872-73b9-4c4a-888c-dea26d4c187c',
+    answers: {
+    },
+    questions: [],
+  },
 ];
 
 export let questions = [
   {
     id: '8xf0y6ziyjabvozdd253nd',
     author: 'fgdsgjsdfgknsfdkgndfbndsfbasdnf',
-    timestamp: 1700754192235,
-    questionText: 'Would you rather buy a house in the suburbs or rent an apartment in the city?',
+    timestamp: 1715784170023,
+    questionText: 'Would you be interested in attending a yoga class on Saturday mornings in the fitness center?',
     optionOne: {
       votes: ['fgdsgjsdfgknsfdkgndfbndsfbasdnf'],
-      text: 'buy a house in the suburbs',
+      text: 'Yes, I would attend Saturday morning yoga',
     },
     optionTwo: {
       votes: [],
-      text: 'rent an apartment in the city',
+      text: 'No, I would not attend Saturday morning yoga',
     },
   },
   {
     id: '6ni6ok3ym7mf1p33lnez',
     author: 'fuh3o82gkuvsdfkjvebjn394o348',
-    timestamp: 1700740000631,
-    questionText: 'Would you rather take a gap year to travel or start a new job immediately?',
+    timestamp: 1715801294015,
+    questionText: 'What type of events would you like to see organized in our apartment complex?',
     optionOne: {
       votes: [],
-      text: 'take a gap year to travel',
+      text: 'Social gatherings like BBQs or game nights',
     },
     optionTwo: {
       votes: ['fuh3o82gkuvsdfkjvebjn394o348', 'fgdsgjsdfgknsfdkgndfbndsfbasdnf'],
-      text: 'start a new job immediately',
+      text: 'Educational workshops or seminars',
     },
   },
   {
     id: 'am8ehyc8byjqgar0jgpub9',
     author: 'fgdsgjsdfgknsfdkgndfbndsfbasdnf',
-    timestamp: 1700655802264,
-    questionText: 'Would you rather adopt a dog from a shelter or purchase a purebred puppy from a breeder?',
+    timestamp: 1715959395056,
+    questionText: 'What type of improvements would you like to see in our apartment complex?',
     optionOne: {
       votes: [],
-      text: 'adopt a dog from a shelter',
+      text: 'Renovations in common areas',
     },
     optionTwo: {
       votes: ['fgdsgjsdfgknsfdkgndfbndsfbasdnf'],
-      text: 'purchase a purebred puppy from a breeder',
+      text: 'Upgrades in individual apartments',
     },
   },
   {
     id: 'loxhs1bqm25b708cmbf3g',
     author: '324ytsdiufygrejkfvmhsdvfm',
-    timestamp: 1700575962234,
-    questionText: 'Would you rather try skydiving for the first time or go scuba diving in a coral reef?',
+    timestamp: 1716047154013,
+    questionText: 'What security measures should we implement in our apartment complex??',
     optionOne: {
       votes: [],
-      text: 'try skydiving for the first time',
+      text: 'Install more security cameras',
     },
     optionTwo: {
       votes: ['fgdsgjsdfgknsfdkgndfbndsfbasdnf'],
-      text: 'scuba diving in a coral reef',
+      text: 'Implement a key card access system',
     },
   },
   {
     id: 'vthrdm985a262al8qx3do',
     author: '324ytsdiufygrejkfvmhsdvfm',
-    timestamp: 1700776863253,
-    questionText: 'Would you rather explore a dense rainforest alone or join a guided wildlife tour in the Amazon?',
+    timestamp: 1716541264056,
+    questionText: 'Would you like the apartment complex to organize a summer block party with games and food trucks?',
     optionOne: {
       votes: ['324ytsdiufygrejkfvmhsdvfm'],
-      text: 'start a new hobby',
+      text: 'Yes, I would attend a summer block party',
     },
     optionTwo: {
       votes: ['fuh3o82gkuvsdfkjvebjn394o348'],
-      text: 'continue with current interests',
+      text: 'No, I would not attend a summer block party',
     },
   },
   {
     id: 'xj352vofupe1dqz9emx13r',
     author: 'fuh3o82gkuvsdfkjvebjn394o348',
-    timestamp: 1700747601631,
-    questionText: 'Would you rather start a new hobby or continue with current interests?',
+    timestamp: 1716574024019,
+    questionText: 'Would you participate in a holiday decorating contest in our apartment complex?',
     optionOne: {
       votes: ['fuh3o82gkuvsdfkjvebjn394o348', '3894y7ow8ehfkhjsbdnsadjfbasdnbg'],
-      text: 'explore a dense rainforest alone',
+      text: 'Yes, I would participate in a holiday decorating contest',
     },
     optionTwo: {
       votes: ['324ytsdiufygrejkfvmhsdvfm'],
-      text: 'join a guided wildlife tour in the Amazon',
+      text: 'No, I would not participate in a holiday decorating contest',
+    },
+  },
+  {
+    id: 'lsn52v467he1dqzgnexhko',
+    author: 'fuh3o82gkuvsdfkjvebjn394o348',
+    timestamp: 1716720840044,
+    questionText: 'How often should we hold residents meetings?',
+    optionOne: {
+      votes: ['fuh3o82gkuvsdfkjvebjn394o348', '3894y7ow8ehfkhjsbdnsadjfbasdnbg'],
+      text: 'Monthly',
+    },
+    optionTwo: {
+      votes: ['324ytsdiufygrejkfvmhsdvfm'],
+      text: 'Quarterly',
     },
   },
 ];
