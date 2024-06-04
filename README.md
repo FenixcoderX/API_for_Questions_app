@@ -1,9 +1,14 @@
 # API for Questions app
 
-TypeScript | MongoDB | Node.js | Express | Dotenv | Jsonwebtoken | Bcrypt | Cookie | CORS
+TypeScript | MongoDB | Node.js | Express | Dotenv | JWT | Bcrypt | Cookie | CORS | SSE |
 
-A RESTful API has been developed to support Questions app. Contains a MongoDB models and handlers. It includes authentication, required endpoints, and data types for users, questions.
+A RESTful API has been developed to support a "Questions" app. 
 
+- **Authentication:** The API handles the registration and authentication process using JSON Web Tokens (JWT).
+- **Endpoints and Models:** It provides required endpoints and models for users and questions.
+- **CRUD Operations:** It contains handlers for all necessary CRUD operations using the MongoDB database.
+- **Security:** Specific endpoints are secured to prevent unauthorized access.
+- **Real-Time Updates:** Server-Sent Events (SSE) are used to update data in real time.
 
 ## Instructions
 
