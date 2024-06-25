@@ -4,6 +4,7 @@ import express, { NextFunction, Request, Response } from 'express';
 import jwt from 'jsonwebtoken';
 import User from '../models/user.model';
 import bcrypt from 'bcrypt';
+import { verifyAuthToken } from '../middleware/verification';
 import { errorHandler } from '../middleware/error';
 
 // Handler functions here
@@ -167,12 +168,12 @@ const google = async (req: Request, res: Response, next: NextFunction) => {
  * @param {express.Application} app - The express application object
  */
 const authRoutes = (app: express.Application) => {
-  // Route to show all users using middleware to verify the token
+// Route to create a new user
   app.post('/auth/signup', signup);
-  // Route to show a specific user using middleware to verify the token
+// Route to login a user
   app.post('/auth/login', login);
   // Route to log out
-  app.post('/auth/logout', logout);
+  app.post('/auth/logout', verifyAuthToken, logout);
   // Route to authenticate a google user
   app.post('/auth/google', google);
 };
